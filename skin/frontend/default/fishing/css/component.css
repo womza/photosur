@@ -1,0 +1,390 @@
+.og-grid {
+  list-style: none;
+  padding: 20px 0;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.og-grid li 
+{
+	/*
+	display: block;
+	float:left;
+	margin: 10px;
+	vertical-align: top;
+	*/
+	/*width:200px;*/
+	/*height: 200px;*/
+}
+.og-grid li .image{position:relative;margin:0 0 10px 0;}
+.og-grid li .image > a
+{
+	border: none;
+	outline: none;
+	display: block;
+	position: relative;
+}
+.og-grid li .image a img {
+	/*width: 300px;*/
+	max-width:100%;
+}
+.og-grid li .image .buttons{display:none;position:absolute;right:0;bottom:0;left:0;z-index:10;text-align:center;background:rgba(255,255,255,0.8);padding:3px 3px;}
+.og-grid li .image .buttons a{font-size: 19px;
+	color: #545454 !important;
+	padding: 0 3px;
+}
+.og-grid li .image .buttons a:hover{color:#a94442 !important;}
+.og-grid li .image:hover .buttons{display:block;}
+.og-grid li .image .preview{opacity:0;background:#fff;padding:15px;position:absolute;z-index:-1;left:105%;top:0;transition:opacity 0.5s ease-in-out;}
+.or-grid li .image .preview .image-desc{background: #545454;color: #fff;padding: 3px 0px;text-align:center;}
+.og-grid li.og-expanded > a::after {
+  top: auto;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #ddd;
+  border-width: 15px;
+  left: 50%;
+  margin: -20px 0 0 -15px;
+}
+
+.og-expander {
+  position: absolute;
+  background: #545454;
+  top: auto;
+  left: 0;
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+  height: 0;
+  overflow: hidden;
+}
+
+.og-expander-inner {
+  padding: 50px 30px;
+  height: 100%;
+}
+
+.og-close {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.og-close::before,
+.og-close::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  height: 1px;
+  background: #888;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.og-close::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.og-close:hover::before,
+.og-close:hover::after {
+  background: #333;
+}
+
+.og-fullimg,
+.og-details {
+  width: 50%;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.og-details {
+  padding: 0 40px 0 20px;
+}
+
+.og-fullimg {
+  text-align: center;
+}
+
+.og-fullimg img {
+  display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.og-details h3 {
+  color: black;
+  font-weight: 300;
+  font-size: 52px;
+  padding: 40px 0 10px;
+  margin-bottom: 10px;
+}
+
+.og-details p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #999;
+}
+
+.og-details a {
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  border: 3px solid #333;
+  display: inline-block;
+  margin: 30px 0 0;
+  outline: none;
+}
+
+.og-details a::before {
+  content: '\2192';
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.og-details a:hover {
+  border-color: #999;
+  color: #999;
+}
+
+.og-loading {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ddd;
+  box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ccc;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  -webkit-animation: loader 0.5s infinite ease-in-out both;
+  -moz-animation: loader 0.5s infinite ease-in-out both;
+  animation: loader 0.5s infinite ease-in-out both;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    background: #ddd;
+  }
+
+  33% {
+    background: #ccc;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd;
+  }
+
+  66% {
+    background: #ccc;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc;
+  }
+}
+
+@-moz-keyframes loader {
+  0% {
+    background: #ddd;
+  }
+
+  33% {
+    background: #ccc;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd;
+  }
+
+  66% {
+    background: #ccc;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc;
+  }
+}
+
+@keyframes loader {
+  0% {
+    background: #ddd;
+  }
+
+  33% {
+    background: #ccc;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd;
+  }
+
+  66% {
+    background: #ccc;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .og-expander h3 {
+    font-size: 32px;
+  }
+
+  .og-expander p {
+    font-size: 13px;
+  }
+
+  .og-expander a {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .og-fullimg {
+    display: none;
+  }
+
+  .og-details {
+    float: none;
+    width: 100%;
+  }
+}
+
+/* Productos de Galeria Magento : kemdmq */
+
+.products-grid .panel {border: 1px solid gray;width: 80%;margin:0 auto;}
+@media only screen and (max-width: 768px) {
+  .page .header-container .header .middle-header {
+    max-height: 50px;
+    padding: 0;
+    margin: 10px 0px 50px;
+  }
+
+  .products-grid .panel {
+    margin: 20px auto;
+  }
+
+  .wrapper .page .header-container .header {
+    height: 130px;
+  }
+
+  .wrapper .page .header-container .header .quick-access .logo img {
+    width: 100px;
+  }
+
+  .wrapper .page .header-container .header .quick-access .quick-access-right .nav-container-mobile {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    float: none;
+    height: 0;
+  }
+
+  .wrapper .page .header-container .header .quick-access .quick-access-right .links, .wrapper .page .header-container .header .quick-access .quick-access-right .form-language {
+    display: inline;
+    float: none;
+  }
+
+  .wrapper .page .header-container .header .quick-access .quick-access-right .form-language select {
+    margin: 0;
+  }
+
+  .wrapper .page .main-container .main-content .main .breadcrumbs .home {
+    display: none;
+  }
+
+  .footer .address-contact {
+    padding: 20px 10px;
+    margin: 10px auto 20px;
+  }
+
+  .footer .address-contact .contact li {
+    margin: 0;
+  }
+
+  .footer .address-contact address {
+    display: inline-block;
+    float: none;
+    padding-top: 10px;
+  }
+}
+
+.products-grid .panel .panel-heading {
+  border-bottom: 1px solid gray;
+  padding: 0;
+  margin: 0;
+}
+
+.products-grid .panel .panel-heading img {
+  width: 100%;
+  height: 100%;
+}
+
+.products-grid .panel .panel-body {
+  padding: 0;
+  margin: 10px 10px 0px;
+}
+
+.products-grid .panel .panel-body .product-title {
+  text-align: center;
+  display: block;
+  color: #666;
+}
+
+.products-grid .panel .panel-body .product-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.products-grid .panel .panel-body .product-title a:hover {
+  text-decoration: underline;
+  color: #444;
+}
+
+.products-grid .panel .panel-body .wish-list {
+  width: 100%;
+  text-align: right;
+}
+
+.products-grid .panel .panel-body .wish-list li {
+  display: inline;
+}
+
+.btn-black {
+  background-color: #333;
+  color: white;
+}
+
+.btn-black:hover {
+  color: #ccc !important;
+}
+
+.btn-black:focus, .btn-black:active {
+  color: lightseagreen !important;
+}
+
+.og-details .dl-horizontal dt {
+  text-align: left !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .og-details .dl-horizontal dt {
+    text-align: left !important;
+  }
+
+  .video-height {
+    min-height: 600px;
+  }
+}
+
+/* Forgot Link */
+
+.main-container .main-content .main .account-login .registered-users .buttons-set a {
+  color: white;
+}
+
+.main-container .main-content .main .account-login .registered-users .buttons-set a:hover {
+  text-decoration: underline;
+}

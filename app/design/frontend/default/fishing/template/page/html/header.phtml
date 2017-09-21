@@ -1,0 +1,143 @@
+<?php
+/**
+* Magento
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE_AFL.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade Magento to newer
+* versions in the future. If you wish to customize Magento for your
+* needs please refer to http://www.magentocommerce.com for more information.
+*
+* @category    design
+* @package     base_default
+* @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+* @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*/
+/**
+* @var Mage_Page_Block_Html_Header $this
+*/
+$video = ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index.php/' ) ? true : false;
+$class = ($video) ? 'header-container video-height' : 'header-container';
+?>
+<header id="header" class="header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+				<h1 class="logo">
+					<strong><?php echo $this->getLogoAlt() ?></strong>
+					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+						<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+					</a>
+				</h1>
+			</div>
+			<div class="hidden-xs hidden-sm col-md-4 col-lg-4">
+			</div>
+			<div class="col-xs-12 col-sm-10 col-md-6 col-lg-6">
+				<div class="nav-container">
+					<ul id="nav">
+						<li class="level0 nav-2 level-top">
+							<p class="welcome-msg"><?php echo $this->getWelcome()?></p>
+							<!--<a href="http://romeripide.factoriadigitalpremium.es" class="level-top">
+							  <span> HOME</span>
+							</a>-->
+						</li>
+						<li class="level0 nav-2 level-top">
+							<a href="<?php print $this->getUrl('wishlist'); ?>" class="level-top">
+								<span> Lightbox </span>
+							</a>
+						</li>
+						<li class="level0 nav-2 level-top last">
+						<a href="http://photosur.com/index.php/gallery.html" class="level-top">
+						  <span>Gallery</span>
+						</a>
+						</li> 
+						<li class="level0 nav-2 level-top">
+						<a href="http://photosur.com/index.php/customer/account/" class="level-top">
+						<span>My Profile</span>
+						</a>
+						</li>
+						<li class="level0 nav-2 level-top last" style="padding-top: 18px">
+						<a href="http://photosur.com/index.php/checkout/cart/" class="level-top">
+						<i class="fa fa-shopping-cart fa-2x"></i>
+						0         </a>
+						</li>
+					</ul>
+				</div>
+				<?php // echo $this->getChildHtml('topMenu') ?>
+				<?php echo $this->getChildHtml('topLinks') ?>
+				<?php echo $this->getChildHtml('store_currency') ?>
+				<?php echo $this->getChildHtml('store_language') ?>
+			</div>
+		</div>
+		<?php
+		// IF WE ARE ON HOMEPAGE
+		if( Mage::getSingleton('cms/page')->getIdentifier() == 'home' 
+			&& Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms' ) : ?>
+		<div class="row">
+			<div class="<?php echo $class ?>">
+				<?php
+				$images = array(
+					array('url' => $this->getSkinUrl('images/slider/slide1.jpg'), 'desc' => ''),
+					array('url' => $this->getSkinUrl('images/slider/slide2.jpg'), 'desc' => ''),
+					array('url' => $this->getSkinUrl('images/slider/slide3.jpg'), 'desc' => '')
+				);
+				?>
+				<div class="fullscreen-bg">
+					<?php /*
+					<video loop="" muted="" autoplay="" poster="/skin/frontend/default/fishing/images/BVH20029205PS.jpg" class="fullscreen-bg_video">
+						<source src="/skin/frontend/default/fishing/images/video.webm" type="video/webm">
+						<source src="/skin/frontend/default/fishing/images/video.mp4" type="video/mp4">
+						<source src="/skin/frontend/default/fishing/images/video.ogv" type="video/ogg">
+					</video>
+					*/?>
+					<div id="home-carousel" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner" role="listbox">
+							<?php foreach($images as $i => $img): ?>
+							<div class="item <?php print $i == 0 ? 'active' : ''; ?>">
+								<img src="<?php print $img['url']; ?>" alt="<?php print $img['desc']; ?>">
+								<div class="carousel-caption"><?php print $img['desc']; ?></div>
+							</div>
+							<?php endforeach; ?>
+						</div>
+						<?php /*
+						<a class="left carousel-control" href="#home_carousel" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a class="right carousel-control" href="#home_carousel" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+						*/?>
+					</div>
+				</div>
+				<?php if (
+				$_SERVER["REQUEST_URI"]=="/" ||
+				$_SERVER["REQUEST_URI"]=="/index.php/" ||
+				$_SERVER["REQUEST_URI"]=="/index.php/?___store=en&___from_store=es" ||
+				$_SERVER["REQUEST_URI"]=="/index.php/?___store=es&___from_store=en") { ?>
+				<div id="home-search">
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3">&nbsp;</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<div class="middle-header">
+							<!--<p class="welcome-msg"><?php //echo $this->getWelcome()?></p>-->
+							<?php echo $this->getChildHtml('topSearch') ?>
+							<?php echo $this->getChildHtml('topContainer'); ?>
+						</div>
+					</div>
+					<div class="hidden-xs col-sm-3 col-md-3 col-lg-3">&nbsp;</div>
+				</div>
+				<?php }; ?>
+			</div>
+		</div>
+		<?php endif; ?>
+	</div>
+</header>
