@@ -1,0 +1,106 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl class="multi-price-options">
+    <?php foreach($_attributes as $_attribute): ?>
+        <dt>
+            <?php echo $_attribute->getLabel() ?> <em>*</em>
+            <hr>
+        </dt>
+        <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+            <div class="input-box" style="display:none;">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                  </select>
+              </div>
+            <div class="radio-options">
+                <table cellpadding="0" cellspacing="0" width="100%"></table>
+            </div>
+        </dd>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+        jQuery(function () {
+            if (typeof spConfig.settings[0]) {
+                var attrId = parseInt("<?php echo $_attribute->getAttributeId() ?>");
+                jQuery('#attribute' + attrId + ' > option').each(function(key, value) {
+                    var $option = jQuery(value);
+                    var opt_value = $option.attr('value');
+                    var opt_text = $option.text().split('+');
+                    if (opt_value.length) {
+                        var $tr = jQuery('<tr class="multi_price_item"></tr>');
+                        $tr.append('<td></td>')
+                            .append('<td></td>');
+                        // add radio with text
+                        $tr.find('td:eq(0)')
+                            .append('<input type="radio" name="multi_price_radio" value="' + opt_value + '" id="multi_price_radio_' + opt_value + '" /> <label for="multi_price_radio_' + opt_value + '">' + opt_text[0] + '</label>');
+                        $tr.find('td:eq(1)')
+                            .append('+' + opt_text[1]);
+
+                        // add row to table
+                        jQuery('.radio-options > table').append($tr);
+                    }
+                });
+
+                jQuery('.radio-options > table').on('click', 'input[name="multi_price_radio"]', function() {
+                    jQuery('#attribute' + attrId).val(jQuery(this).val()).click();
+                    triggerEvent($$('.multi-price-options .super-attribute-select')[0],'change');
+                });
+            }
+        });
+        // Custom prototype function to fire an event
+        // http://stackoverflow.com/questions/460644/trigger-an-event-with-prototype
+        function triggerEvent(element, eventName) {
+            // safari, webkit, gecko
+            if (document.createEvent)
+            {
+                var evt = document.createEvent('HTMLEvents');
+                evt.initEvent(eventName, true, true);
+
+                return element.dispatchEvent(evt);
+            }
+
+            // Internet Explorer
+            if (element.fireEvent) {
+                return element.fireEvent('on' + eventName);
+            }
+        }
+    </script>
+    <style type="text/css">
+    .multi-price-options hr { margin-top: 10px; margin-bottom: 10px; }
+    .multi-price-options .radio-options input[type=radio] { margin:0; }
+    .multi-price-options .radio-options td { border-bottom:1px solid #fff; padding: 10px 0; }
+    .multi-price-options .radio-options td label { display: inline-block; font-weight: normal; }
+    .multi-price-options .radio-options td:nth-child(2) { text-align:right; }
+    </style>
+<?php endif;?>
